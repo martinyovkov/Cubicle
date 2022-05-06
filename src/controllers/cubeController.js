@@ -2,10 +2,17 @@ const express = require('express');
 
 const router = express.Router();
  
-const createCube = (req, res)=>{
+const renderCreateCube = (req, res)=>{
     res.render('create');
 }
 
-router.get('/create', createCube);
+const createCube = (req, res)=>{
+    console.log(req.body);
+
+    res.redirect('/cube/create');
+}
+
+router.get('/create', renderCreateCube);
+router.post('/create', createCube);
 
 module.exports = router;
