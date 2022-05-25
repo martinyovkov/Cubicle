@@ -6,10 +6,21 @@ const router = express.Router();
 const renderHome = (req, res)=>{
     let cubes = cubeService.getAll();
     console.log(cubes);
-    
+
     res.render('index', { cubes });
 }
 
+const search = (req, res)=>{
+    console.log(req.query);
+
+    let {search, from, to} = req.query;
+
+    let cubes = cubeService.search(search, from, to);
+    
+    res.render('index', { cubes })
+}
+
 router.get('/', renderHome);
+router.get('/search', search)
 
 module.exports = router;
