@@ -11,14 +11,13 @@ const renderCreateCube = (req, res)=>{
 }
 
 const createCube = (req, res)=>{
-    let{name, description, imageUrl, difficultyLevel} = req.body;
+    let {name, description, imageUrl, difficultyLevel} = req.body;
 
     cubeService.create(name, description, imageUrl, difficultyLevel);
 
     res.redirect('/cube/create')
 
 }
-
 
 
 router.get('/create', renderCreateCube);

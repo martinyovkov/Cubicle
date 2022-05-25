@@ -5,7 +5,6 @@ class Cube{
         this.imageUrl = imageUrl;
         this.difficulty = difficulty;
     }
-
 }
 
 module.exports = Cube;
