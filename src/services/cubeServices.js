@@ -9,9 +9,14 @@ const create = (name, description, imageUrl, difficulty) =>{
 
 const getAll = () => Cube.getAll(); 
 
+const getById = (id)=>{
+    return Cube.getAll().find(x=> x.id == id);
+}
+
 const cubeService = {
     create,
-    getAll
+    getAll,
+    getById 
 };
 
 module.exports = cubeService;
