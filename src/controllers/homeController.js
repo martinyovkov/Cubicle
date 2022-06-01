@@ -3,11 +3,11 @@ const cubeService = require('../services/cubeServices');
 
 const router = express.Router();
  
-const renderHome = (req, res)=>{
-    let cubes = cubeService.getAll();
+const renderHome =  async (req, res)=>{
+    let cubes = await cubeService.getAll();
     console.log(cubes);
 
-    res.render('index', { cubes });
+    res.render('index', { cubes }); 
 }
 
 const search = (req, res)=>{

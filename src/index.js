@@ -17,7 +17,7 @@ app.use(routes);
 
 initDatabase("mongodb://localhost:27017/cubes")
     .then(()=>{
-        app.listen(5000, console.log.bind(console, 'Application is running on http://localhost:5000}'));
+        app.listen(5000, console.log.bind(console, 'Application is running on http://localhost:5000'));
     })
     .catch(err=> {
         console.log('Application init failed: ', err);
