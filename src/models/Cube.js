@@ -2,20 +2,34 @@ const mongoose = require('mongoose');
 
 const cubeSchema = new mongoose.Schema({
     name: {
-      typr: String,
+      type: String,
       required: true
     },
     description: {
-      typr: String,
+      type: String,
       required: true,
       maxlength:100
     }, 
     imageUrl: {
-      typr: String,
-      required: true
-    },
+      type: String,
+      required: true,
+      //validate: /^https?:\/\//
+      validate:{
+        validator: function(value){
+          return  /^https?:\/\//.test(value) 
+        },
+        message: `Image Url is invalid!`
+      }
 
-    
-})
+    },
+    difficultyLevel: {
+      type: Number,
+      required: true,
+      min: 1,
+      max: 5
+    }
+});
+
+const Cube = mongoose.model('Cube' ,cubeSchema);
 
 module.exports = Cube;
