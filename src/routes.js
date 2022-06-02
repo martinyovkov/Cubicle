@@ -3,6 +3,7 @@ const express = require('express');
 const cubeController = require('./controllers/cubeController');
 const homeController = require('./controllers/homeController');
 const aboutController = require('./controllers/aboutController');
+const accessoryController = require('./controllers/accessoryController');
 
 const router = express.Router();
 
@@ -10,6 +11,7 @@ const router = express.Router();
 router.use(aboutController);
 router.use(homeController);
 router.use('/cube', cubeController);
+router.use('/accessory', accessoryController);
 router.use((req, res)=> {
     res.render('404');
 });

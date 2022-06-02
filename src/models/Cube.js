@@ -18,7 +18,7 @@ const cubeSchema = new mongoose.Schema({
         validator: function(value){
           return  /^https?:\/\//.test(value) 
         },
-        message: `Image Url is invalid!`
+        message: (props)=> `Image Url ${props.value} is invalid!`
       }
 
     },
