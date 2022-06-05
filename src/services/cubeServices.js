@@ -16,7 +16,7 @@ const create = (name, description, imageUrl, difficulty) =>{
 const getAll = () => Cube.find({}).lean(); 
 
 const getById = (id)=>{
-    return Cube.findById(id).lean(); 
+    return Cube.findById(id).populate('accessories').lean(); 
 }
 
 const search =  async (text, from ,to)=>{
@@ -42,6 +42,9 @@ const attachAccessory = async (cubeId, accessoryId)=>{
 
     return cube.save();
 };
+
+
+
 
 const cubeService = {
     create,
