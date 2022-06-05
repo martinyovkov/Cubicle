@@ -18,18 +18,18 @@ const getById = (id)=>{
     return Cube.findById(id).lean(); 
 }
 
-const search = (text, from ,to)=>{
+const search =  async (text, from ,to)=>{
     if (from == '' && to =='') {
-         return getAll().filter(x=> x.name.toLowerCase().includes(text.toLowerCase()));
+         return await getAll().filter(x=> x.name.toLowerCase().includes(text.toLowerCase()));
     }
     else if (to =='') {
-        return getAll().filter(x=> x.name.toLowerCase().includes(text.toLowerCase()) && x.difficulty>= from);
+        return await getAll().filter(x=> x.name.toLowerCase().includes(text.toLowerCase()) && x.difficulty>= from);
     }
     else if (from == '') {
-        return getAll().filter(x=> x.name.toLowerCase().includes(text.toLowerCase()) && x.difficulty<= to);
+        return await getAll().filter(x=> x.name.toLowerCase().includes(text.toLowerCase()) && x.difficulty<= to);
     }
     else{
-        return getAll().filter(x=> x.name.toLowerCase().includes(text.toLowerCase()) && x.difficulty>= from && x.difficulty<= to);
+        return await getAll().filter(x=> x.name.toLowerCase().includes(text.toLowerCase()) && x.difficulty>= from && x.difficulty<= to);
     }   
 }
 

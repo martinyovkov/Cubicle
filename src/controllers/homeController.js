@@ -9,12 +9,12 @@ const renderHome =  async (req, res)=>{
     res.render('index', { cubes }); 
 }
 
-const search = (req, res)=>{
+const search = async (req, res)=>{
     console.log(req.query);
 
     let {search, from, to} = req.query;
 
-    let cubes = cubeService.search(search, from, to);
+    let cubes = await cubeService.search(search, from, to);
     
     res.render('index', { cubes })
 }
