@@ -26,9 +26,16 @@ const cubeDetails = async (req, res) =>{
     res.render('cube/details', {...cube}) 
 }
 
+const renderAttachAccessoryPage = async(req, res) =>{
+    let cube = await cubeService.getById(req.params.cubeId);
+
+    res.render('accessory/attach', {...cube})
+
+};
 
 router.get('/create', renderCreateCube);
 router.post('/create', createCube);
 router.get('/:cubeId', cubeDetails);
+router.get('/:cubeId/attach-accessory', renderAttachAccessoryPage);
 
 module.exports = router;
