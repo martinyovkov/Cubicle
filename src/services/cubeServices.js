@@ -1,4 +1,5 @@
 const Cube = require("../models/Cube");
+const Accessory = require("../models/Accessory");
 
 const create = (name, description, imageUrl, difficulty) =>{
     let cube = new Cube({
@@ -33,11 +34,21 @@ const search =  async (text, from ,to)=>{
     }   
 }
 
+const attachAccessory = async (cubeId, accessoryId)=>{
+    let cube = await Cube.findById(cubeId);
+    let accessory = await Accessory.findById(accessoryId);
+    
+    cube.accessories.push(accessory);
+
+    return cube.save();
+};
+
 const cubeService = {
     create,
     getAll,
     getById,
-    search
+    search,
+    attachAccessory
 };
 
 module.exports = cubeService;
