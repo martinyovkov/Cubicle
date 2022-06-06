@@ -15,7 +15,8 @@ const search = async (req, res)=>{
     let {search, from, to} = req.query;
 
     let cubes = await cubeService.search(search, from, to);
-    
+
+    console.log(cubes); 
     res.render('index', { cubes })
 }
 

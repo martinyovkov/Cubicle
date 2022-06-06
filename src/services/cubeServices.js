@@ -22,19 +22,23 @@ const getById = (id)=>{
 
 
 
-const search =  async (text, from ,to)=>{
+const search =  async (search, from ,to)=>{
+    let result = await getAll();
+
     if (from == '' && to =='') {
-         return await getAll().filter(x=> x.name.toLowerCase().includes(text.toLowerCase()));
+        result.filter(x=> x.name.toLowerCase().includes(search.toLowerCase()));
     }
     else if (to =='') {
-        return await getAll().filter(x=> x.name.toLowerCase().includes(text.toLowerCase()) && x.difficulty>= from);
+        result.filter(x=> x.name.toLowerCase().includes(search.toLowerCase()) && x.difficulty>= from);
     }
     else if (from == '') {
-        return await getAll().filter(x=> x.name.toLowerCase().includes(text.toLowerCase()) && x.difficulty<= to);
+       result.filter(x=> x.name.toLowerCase().includes(search.toLowerCase()) && x.difficulty<= to);
     }
     else{
-        return await getAll().filter(x=> x.name.toLowerCase().includes(text.toLowerCase()) && x.difficulty>= from && x.difficulty<= to);
+        result.filter(x=> x.name.toLowerCase().includes(search.toLowerCase()) && x.difficulty>= from && x.difficulty<= to);
     }   
+
+    return result;
 }
 
 const attachAccessory = async (cubeId, accessoryId)=>{
