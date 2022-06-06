@@ -19,6 +19,9 @@ const getById = (id)=>{
     return Cube.findById(id).populate('accessories').lean(); 
 }
 
+
+
+
 const search =  async (text, from ,to)=>{
     if (from == '' && to =='') {
          return await getAll().filter(x=> x.name.toLowerCase().includes(text.toLowerCase()));

@@ -6,9 +6,14 @@ const create = async(name, description, imageUrl)=>{
 
 const getAll = async () => Accessory.find({}).lean();
 
+const getAllUnused = (accessoryIds)=>{
+    return Accessory.find({_id: {$nin: accessoryIds}}).lean();
+}
+
 const accessoryService = {
     create,
-    getAll
+    getAll,
+    getAllUnused
 };
 
 module.exports = accessoryService;

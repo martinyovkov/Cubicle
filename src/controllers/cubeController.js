@@ -29,8 +29,9 @@ const cubeDetails = async (req, res) =>{
 
 const renderAttachAccessoryPage = async(req, res) =>{
     let cube = await cubeService.getById(req.params.cubeId);
-    let accessories = await accessoryService.getAll();
-
+    let accessories = await accessoryService.getAllUnused(cube.accessories.map(x=> x._id));
+   
+    
     res.render('accessory/attach', {...cube, accessories})
 
 };

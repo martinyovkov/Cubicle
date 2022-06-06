@@ -9,8 +9,8 @@
         <form action="/cube/{{_id}}/attach-accessory" method="POST">
             <label for="accessory">Accessories</label>
             <select id="accessory" name="accessory" />
-            {{#each accessories}}
-                <option value="{{_id}}">{{name}}</option>
+            {{#each accessories}}     
+                    <option value="{{_id}}">{{name}}</option>
             {{/each}}
             </select>
             <input type="submit" value="Attach">
