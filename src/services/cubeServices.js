@@ -1,11 +1,12 @@
 const Cube = require("../models/Cube");
 const Accessory = require("../models/Accessory");
 
-const create = (name, description, imageUrl, difficulty) =>{
+const create = (name, creatorId, description, imageUrl, difficulty) =>{
     let cube = new Cube({
         name, 
         description, 
-        imageUrl, 
+        imageUrl,
+        creatorId,
         difficulty
     });
  

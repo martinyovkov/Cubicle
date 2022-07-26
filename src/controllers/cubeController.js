@@ -9,10 +9,10 @@ const renderCreateCube = (req, res)=>{
 }
 
 const createCube = async (req, res)=>{
-    let {name, description, imageUrl, difficultyLevel} = req.body;
+    let {name, description, imageUrl, creatorId, difficultyLevel} = req.body;
 
     try {
-        await cubeService.create(name, description, imageUrl, difficultyLevel);
+        await cubeService.create(name, description, imageUrl, creatorId, difficultyLevel);
         res.redirect('/');
 
     } catch (error) {

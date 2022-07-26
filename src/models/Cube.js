@@ -22,6 +22,10 @@ const cubeSchema = new mongoose.Schema({
       }
 
     },
+    creatorId:{
+      type: String,
+      required: true
+    },
     difficulty: {
       type: Number,
       required: true,
