@@ -16,7 +16,7 @@ router.use('/cube', cubeController);
 router.use('/accessory', accessoryController);
 router.use(loginController);
 router.use(registerController);
-router.use((req, res)=> {
+router.use('*', (req, res)=> {
     res.render('404');
 });
 
