@@ -43,10 +43,30 @@ const attachAccessory = async(req,res) =>{
     res.redirect(`/cube/${cubeId}`)
 };
 
+const renderEditCube = async (req, res) =>{
+    let cube = await cubeService.getById(req.params.cubeId);
+
+    if (!cube) {
+        res.redirect('404');
+    }
+
+    res.render('cube/edit', {...cube});
+}
+
+const editCube = async(req, res)=>{
+    let cube = await cubeService.getById(req.params.cubeId);
+
+    console.log(req.body);
+
+    res.redirect(`/cube/${cube._id}`);
+}
+
 router.get('/create', renderCreateCube);
 router.post('/create', createCube);
 router.get('/:cubeId', cubeDetails);
 router.get('/:cubeId/attach-accessory', renderAttachAccessoryPage);
 router.post('/:cubeId/attach-accessory', attachAccessory);
+router.get('/:cubeId/edit', renderEditCube);
+router.post('/:cubeId/edit', editCube);
 
 module.exports = router;

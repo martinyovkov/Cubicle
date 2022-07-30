@@ -9,7 +9,7 @@ const registerUser = async (req,res)=>{
    let createdUser = await authService.register(req.body);
 
    if (createdUser) {
-    res.redirect('/');
+    res.redirect('/login');
     console.log(createdUser);
    }else {
     res.redirect('404');
