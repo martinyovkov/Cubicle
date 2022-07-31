@@ -14,12 +14,15 @@ const create = (name, description, imageUrl, creatorId, difficulty) =>{
    return cube.save();
 };
 
+const edit = (cubeId, cubeData)=>{
+    return Cube.findByIdAndUpdate(cubeId, cubeData);
+}
+
 const getAll = () => Cube.find({}).lean(); 
 
 const getById = (id)=>{
     return Cube.findById(id).populate('accessories').lean(); 
 }
-
 
 
 
@@ -56,6 +59,7 @@ const attachAccessory = async (cubeId, accessoryId)=>{
 
 const cubeService = {
     create,
+    edit,
     getAll,
     getById,
     search,
