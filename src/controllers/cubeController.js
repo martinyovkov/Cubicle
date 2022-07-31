@@ -54,7 +54,7 @@ const renderEditCube = async (req, res) =>{
 }
 
 const editCube = async(req, res)=>{
-console.log(req.body);
+    console.log(req.body);
 
     let modifiedCube = await cubeService.edit(req.params.cubeId, req.body);
  
