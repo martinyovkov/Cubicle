@@ -1,5 +1,6 @@
 const express = require('express');
 const authService = require('../services/authService');
+const {sessionName} = require('../config/constants');
 
 const router = express.Router();
 
@@ -14,7 +15,7 @@ const loginUser = async (req, res)=>{
     return res.redirect('/404');
    }
     console.log(token);
-    res.cookie('session', token);
+    res.cookie(sessionName, token, {httpOnly: true});
     res.redirect('/');
 };
 

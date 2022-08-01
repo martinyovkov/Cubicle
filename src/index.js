@@ -2,6 +2,7 @@ const express = require('express');
 const initHandlebars = require('./config/handlebars');
 const cookieParser = require('cookie-parser');
 const path  = require('path');
+const authMiddleware = require('./middlewares/authMiddleware');
 const routes = require('./routes');
 const config = require('./config/config.json')[process.env.NODE_ENV];
 const initDatabase = require('./config/database');
@@ -14,6 +15,8 @@ initHandlebars(app);
 
 app.use(express.static(path.resolve(__dirname, './public')));
 app.use(cookieParser());
+
+app.use(authMiddleware.auth);
 
 app.use(routes);
 

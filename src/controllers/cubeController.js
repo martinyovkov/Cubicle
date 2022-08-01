@@ -54,7 +54,7 @@ const renderEditCube = async (req, res) =>{
 }
 
 const editCube = async(req, res)=>{
-    let modifiedCube = await cubeService.edit(req.params.cubeId, req.body).lean();
+    let modifiedCube = await cubeService.edit(req.params.cubeId, req.body);
     
  
     res.redirect(`/cube/${modifiedCube._id}`);
