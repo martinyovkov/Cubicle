@@ -45,7 +45,7 @@ const attachAccessory = async(req,res) =>{
 
 const renderEditCube = async (req, res) =>{
     let cube = await cubeService.getById(req.params.cubeId);
-
+    cube[`difficultyLevel${cube.difficulty}`] = true;
     if (!cube) {
         res.redirect('404');
     }
@@ -54,9 +54,8 @@ const renderEditCube = async (req, res) =>{
 }
 
 const editCube = async(req, res)=>{
-    console.log(req.body);
-
-    let modifiedCube = await cubeService.edit(req.params.cubeId, req.body);
+    let modifiedCube = await cubeService.edit(req.params.cubeId, req.body).lean();
+    
  
     res.redirect(`/cube/${modifiedCube._id}`);
 }
