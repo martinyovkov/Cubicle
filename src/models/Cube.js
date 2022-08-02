@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const User = require('./User');
 
 const cubeSchema = new mongoose.Schema({
     name: {
@@ -23,7 +24,8 @@ const cubeSchema = new mongoose.Schema({
 
     },
     creatorId:{
-      type: String,
+      type: mongoose.Types.ObjectId,
+      ref: 'User',
       required: true
     },
     difficulty: {

@@ -1,6 +1,8 @@
 const express = require('express');
 const cubeService = require('../services/cubeServices');
 const accessoryService = require('../services/accessoryService');
+const { isAuth } = require('../middlewares/authMiddleware');
+const { isOwner } = require('../middlewares/cubeMiddleware');
 
 const router = express.Router();
  
@@ -9,7 +11,8 @@ const renderCreateCube = (req, res)=>{
 }
 
 const createCube = async (req, res)=>{
-    let {name, description, imageUrl, creatorId, difficultyLevel} = req.body;
+    let {name, description, imageUrl, difficultyLevel} = req.body;
+    let creatorId = req.user._id; 
 
     try {
         await cubeService.create(name, description, imageUrl, creatorId, difficultyLevel);
@@ -45,12 +48,19 @@ const attachAccessory = async(req,res) =>{
 
 const renderEditCube = async (req, res) =>{
     let cube = await cubeService.getById(req.params.cubeId);
-    cube[`difficultyLevel${cube.difficulty}`] = true;
-    if (!cube) {
-        res.redirect('404');
+    if (isOwner){
+        
+        cube[`difficultyLevel${cube.difficulty}`] = true;
+        if (!cube) {
+            res.redirect('404');
+            res.render('cube/edit', {...cube});
+        }
+    }else {
+        res.redirect('/404');
     }
 
-    res.render('cube/edit', {...cube});
+    
+    
 }
 
 const editCube = async(req, res)=>{
@@ -60,12 +70,12 @@ const editCube = async(req, res)=>{
     res.redirect(`/cube/${modifiedCube._id}`);
 }
 
-router.get('/create', renderCreateCube);
-router.post('/create', createCube);
+router.get('/create', isAuth ,renderCreateCube);
+router.post('/create', isAuth, createCube);
 router.get('/:cubeId', cubeDetails);
-router.get('/:cubeId/attach-accessory', renderAttachAccessoryPage);
-router.post('/:cubeId/attach-accessory', attachAccessory);
-router.get('/:cubeId/edit', renderEditCube);
+router.get('/:cubeId/attach-accessory', isAuth, renderAttachAccessoryPage);
+router.post('/:cubeId/attach-accessory', isAuth, attachAccessory);
+router.get('/:cubeId/edit',  renderEditCube);
 router.post('/:cubeId/edit', editCube);
 
 module.exports = router;
