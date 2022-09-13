@@ -6,6 +6,8 @@ const aboutController = require('./controllers/aboutController');
 const accessoryController = require('./controllers/accessoryController');
 const loginController = require('./controllers/loginController');
 const registerController = require('./controllers/registerController');
+const logoutController = require('./controllers/logoutController');
+
 
 const router = express.Router();
 
@@ -16,6 +18,7 @@ router.use('/cube', cubeController);
 router.use('/accessory', accessoryController);
 router.use(loginController);
 router.use(registerController);
+router.use(logoutController);
 router.use('*', (req, res)=> {
     res.render('404');
 });
