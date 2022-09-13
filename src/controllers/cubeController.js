@@ -48,18 +48,16 @@ const attachAccessory = async(req,res) =>{
 
 const renderEditCube = async (req, res) =>{
     let cube = await cubeService.getById(req.params.cubeId);
-    if (isOwner){
-        
+    if (cube.creatorId == req.user._id){
+
         cube[`difficultyLevel${cube.difficulty}`] = true;
         if (!cube) {
             res.redirect('404');
-            res.render('cube/edit', {...cube});
-        }
+           
+        }else res.render('cube/edit', {...cube});
     }else {
         res.redirect('/404');
-    }
-
-    
+    } 
     
 }
 
