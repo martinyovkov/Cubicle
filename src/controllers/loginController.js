@@ -14,7 +14,6 @@ const loginUser = async (req, res)=>{
    if (!token) {
     return res.redirect('/404');
    }
-    console.log(token);
     res.cookie(sessionName, token, {httpOnly: true});
     res.redirect('/');
 };

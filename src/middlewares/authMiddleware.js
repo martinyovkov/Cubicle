@@ -14,8 +14,6 @@ exports.auth= async (req,res, next) =>{
             req.user = decodedText;
             res.locals.user = decodedText; 
 
-            console.log(req.user);
-
         } catch (error)  {
            return res.redirect('404');
         }

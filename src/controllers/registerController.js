@@ -10,7 +10,6 @@ const registerUser = async (req,res)=>{
 
    if (createdUser) {
     res.redirect('/login');
-    console.log(createdUser);
    }else {
     res.redirect('404');
    }
