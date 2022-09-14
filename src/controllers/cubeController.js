@@ -26,8 +26,9 @@ const createCube = async (req, res)=>{
 
 const cubeDetails = async (req, res) =>{
      let cube = await cubeService.getById(req.params.cubeId);
-
-    res.render('cube/details', {...cube}) 
+    
+    const isOwner = cube.creatorId == req.user?._id;
+    res.render('cube/details', {...cube, isOwner}) 
 }
 
 const renderAttachAccessoryPage = async(req, res) =>{
@@ -68,6 +69,25 @@ const editCube = async(req, res)=>{
     res.redirect(`/cube/${modifiedCube._id}`);
 }
 
+const renderDeleteCube = async(req, res)=>{
+    const cube =  await cubeService.getById(req.params.cubeId);
+    if (cube.creatorId == req.user._id){
+       res.render('cube/delete', {cube});
+    }
+    
+}
+
+const deleteCube = async(req, res)=>{
+    const cube =  await cubeService.getById(req.params.cubeId);
+    if (cube.creatorId == req.user._id){
+        await cubeService.deleteCube(req.params.cubeId);
+    }
+    
+    res.redirect('/');
+}
+
+
+
 router.get('/create', isAuth ,renderCreateCube);
 router.post('/create', isAuth, createCube);
 router.get('/:cubeId', cubeDetails);
@@ -75,5 +95,8 @@ router.get('/:cubeId/attach-accessory', isAuth, renderAttachAccessoryPage);
 router.post('/:cubeId/attach-accessory', isAuth, attachAccessory);
 router.get('/:cubeId/edit',  renderEditCube);
 router.post('/:cubeId/edit', editCube);
+router.get('/:cubeId/delete', isAuth, renderDeleteCube);
+router.post('/:cubeId/delete',isAuth, deleteCube);
+
 
 module.exports = router;
