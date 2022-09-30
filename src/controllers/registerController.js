@@ -5,7 +5,7 @@ const router = express.Router();
 const renderRegister = (req,res)=>{
     res.render('registerPage');
 }
-const registerUser = async (req,res)=>{
+const registerUser = async (req,res)=>{;
    let createdUser = await authService.register(req.body);
 
    if (createdUser) {
