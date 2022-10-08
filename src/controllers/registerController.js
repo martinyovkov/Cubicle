@@ -25,5 +25,5 @@ const registerUser = async (req,res)=>{
 }
 
 router.get('/register', renderRegister);
-router.post('/register', body('username').not().isEmail() ,registerUser);
+router.post('/register', body('username').not().isEmail(), registerUser);
 module.exports = router;
