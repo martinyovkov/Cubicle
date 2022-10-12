@@ -9,13 +9,19 @@ const renderLogin = (req, res)=>{
 }
 
 const loginUser = async (req, res)=>{
-   let token = await authService.login(req.body);
+
+    try {
+        let token = await authService.login(req.body);
+        
+        if (!token) {
+            return res.redirect('/404');
+            }
+        res.cookie(sessionName, token, {httpOnly: true});
+        res.redirect('/');
+    } catch (error) {
+        res.status(400).render('loginPage', {error: error.message})
+    }
    
-   if (!token) {
-    return res.redirect('/404');
-   }
-    res.cookie(sessionName, token, {httpOnly: true});
-    res.redirect('/');
 };
 
 router.get('/login', renderLogin);
