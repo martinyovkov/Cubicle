@@ -1,4 +1,4 @@
-exports.modelValidator = (Model)=> async(req, res, next)=>{
+exports.modelValidator = (Model)=> async(req, res, next)=>{ 
     try {
         await Model.validate(req.body);
         next();
