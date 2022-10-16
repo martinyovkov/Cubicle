@@ -2,11 +2,16 @@ const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
     username:{
         type: String,
-        required: true
+        required: [true, 'Username is required!'],
+        unique: [true, 'This username is already taken!'],
+        validate: /[a-zA-Z0-9]/,
+        minlength: 5
     },
     password:{
         type: String,
-        required: true
+        required: [true,'Password is required!'],
+        validate: /[a-zA-Z0-9]/,
+        minlength:8
     }  
 });
 

@@ -6,22 +6,20 @@ const router = express.Router();
 const renderRegister = (req,res)=>{
     res.render('registerPage');
 }
-const registerUser = async (req,res)=>{
+const registerUser = async (req,res, next)=>{
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-        return res.status(400).json({errors:errors.array() });
+        //return res.status(400).json({errors:errors.array()[0].msg});
+        next({message: errors.array()[0].msg});
     }
 
-   let createdUser = await authService.register(req.body);
-
-   if (createdUser) {
-    res.redirect('/login');
-   }else {
-    res.redirect('404');
-   }
-   
-    
+    try {
+        await authService.register(req.body);
+        res.redirect('/login');
+    } catch (error) {
+        res.status(401).render('registerPage', {error: error.message});
+    }
 }
 
 router.get('/register', renderRegister);

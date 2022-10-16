@@ -7,13 +7,15 @@ const{saltRounds, secret} = require('../config/constants');
 
 exports.register = async ({username, password, repeatPassword}) => {
     if (password !== repeatPassword) {
-        return false;
+        throw {
+            message:'Repeat password should match password'
+        }
     }
-    let hashedPass = await bcrypt.hash(password, saltRounds);
+    //let hashedPass = await bcrypt.hash(password, saltRounds);
 
     let createdUser = User.create({
         username,
-        password: hashedPass
+        password//: hashedPass
     })
     return createdUser;
 };

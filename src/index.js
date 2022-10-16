@@ -3,6 +3,7 @@ const initHandlebars = require('./config/handlebars');
 const cookieParser = require('cookie-parser');
 const path  = require('path');
 const authMiddleware = require('./middlewares/authMiddleware');
+const {errorHandler} = require('./middlewares/errorHandlerMiddleware');
 const routes = require('./routes');
 const config = require('./config/config.json')[process.env.NODE_ENV];
 const initDatabase = require('./config/database');
@@ -19,6 +20,8 @@ app.use(cookieParser());
 app.use(authMiddleware.auth );
 
 app.use(routes);
+
+app.use(errorHandler);
 
 initDatabase("mongodb://localhost:27017/cubes")
     .then(()=>{
